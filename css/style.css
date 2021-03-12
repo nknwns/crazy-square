@@ -3,9 +3,17 @@ body {
 	background: black;
 }
 
+#body {
+	background: black;
+}
+
 * {
 	box-sizing: border-box;
 	font-family: monospace;
+}
+
+* {
+	transition: background-color .5s ease;
 }
 
 .game {
@@ -19,6 +27,14 @@ body {
 	width: 100px;
 	background-color: red;
 	position: absolute;
+}
+
+.white {
+	background-color: #e9ebee;
+}
+
+.black {
+	background-color: black;
 }
 
 .place {
@@ -39,7 +55,7 @@ body {
 
 .button {
 	display: none;
-	left: calc(50% - 70px);
+	left: calc(50% - 97px);
 	top: calc(50% - 26px);
 	padding: 10px 20px;
 	font-size: 25px;
@@ -52,6 +68,7 @@ body {
 	border-radius: 20px;
 	position: absolute;
 	transition: all .7s ease;
+	z-index: 3;
 }
 
 .button.active {
@@ -70,11 +87,93 @@ body {
 	position: absolute;
 	background-color: black;
 	color: white;
-	z-index: 2;
+	z-index: 4;
 	animation: loading 2s ease;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
+}
+
+.checkbox {
+	width: 2em;
+	margin-left: -2.5em;
+	border-radius: 2em;
+	transition: background-position .15s ease-in-out;
+	border: 1px solid rgba(0,0,0,.25);
+}
+
+.switch {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 3;
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #e9ebee;
+	transition: .4s;
+	border: 2px solid rgba(0, 0, 0, 0.45);
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 20px;
+	width: 20px;
+	left: 4px;
+	bottom: 3px;
+	background-color: black;
+	transition: .4s;
+}
+
+input:checked + .slider {
+	background-color: black;
+	border-color: rgba(255, 255, 255, 0.45);
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+	transform: translateX(30px);
+	background-color: #e9ebee;
+}
+
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.scoreboard {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 3;
+	font-size: 20px;
+	background-color: #e9ebee;
+	border-radius: 25px;
+	padding: 2px 15px;
+	border: 2px solid rgba(0, 0, 0, 0.45);
 }
 
 @keyframes loading {

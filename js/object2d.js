@@ -20,9 +20,11 @@ class Object2D {
 		return color;
 	}
 
-	updateBackground() {
+	updateBackground(type = null) {
 		// funny function
-		document.getElementById(this.idName).style.backgroundColor = this.generateRandomColor();
+		if (type === null) {
+			document.getElementById(this.idName).style.backgroundColor = this.generateRandomColor();
+		}
 	}
 
 	getPosition() {
@@ -36,6 +38,7 @@ class Object2D {
 	destroy() {
 		this._liveProcess = false;
 		document.getElementById(this.idName).remove();
+		console.log("Destruction object.");
 	}
 
 	render() {

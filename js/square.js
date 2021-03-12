@@ -20,8 +20,10 @@ class Square extends Object2D {
 	createSquare() {
 		let elementHTML = document.createElement('div');
 		elementHTML.classList.add("square");
+		elementHTML.classList.add("black");
 		elementHTML.id = "square";
 		document.getElementById("game").insertAdjacentElement("afterend", elementHTML);
+		console.log("Create square.");
 	}
 
 	gravity() {

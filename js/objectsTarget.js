@@ -2,10 +2,21 @@ class ObjectsTarget extends Object2D {
 	constructor(count) {
 		super({height: 0, width: 0, idName: "null"});
 		this.objects = [];
+		this.callbackList = [];
 		for (let i = 4; i < count + 4; i++) {
-			console.log(`Create ${i}/${count} objects`);
+			console.log(`Create ${i - 3}/${count} objects.`);
 			this.objects.push(this.createObject({positionX: i * 500}));
 		}
+	}
+
+	setCallback(method, callback) {
+		switch (method) {
+			case "checkTarget":
+				this.callbackList.push({methodName: "checkTarget", callback: callback});
+				break;
+		}
+		console.log(`Set a new callback for the method "${method}".`);
+
 	}
 
 	createObject(state) {
@@ -22,14 +33,21 @@ class ObjectsTarget extends Object2D {
 		this._liveProcess = false;
 		this.objects.forEach((element) => {
 			document.querySelector(`[data-object-target-id="${element.id}"]`).remove();
+			console.log(`Destruction of objects. ${element.id + 1}/${this.objects.length}.`);
 		});
 	}
 
-	updateBackground() {
-		let color = this.generateRandomColor();
-		this.objects.forEach((element) => {
-			document.querySelector(`[data-object-target-id="${element.id}"]`).style.backgroundColor = color;
-		});
+	updateBackground(colorDefault = null) {
+		if (colorDefault === null) {
+			let color = this.generateRandomColor();
+			this.objects.forEach((element) => {
+				document.querySelector(`[data-object-target-id="${element.id}"]`).style.backgroundColor = color;
+			});
+		} else {
+			this.objects.forEach((element) => {
+				document.querySelector(`[data-object-target-id="${element.id}"]`).style.backgroundColor = colorDefault;
+			});
+		}
 	}
 
 	checkTarget(object) {
@@ -41,6 +59,9 @@ class ObjectsTarget extends Object2D {
 				if (objectPosition.y < (element.height + 190)) {
 					Game.stop();
 				}
+				this.callbackList.forEach((element) => {
+					if (element.methodName == "checkTarget") element.callback();
+				})
 			}
 		}
 	}
