@@ -1,5 +1,6 @@
 # Crazy-square
 I'm crazy, and my work is even more crazy. Jump and be surprised!
+Enjoy - [crazy-square](https://game-crazy-square.web.app)
 
 ## How to install?
 Клонируйте репозиторий и запустите файл *index.html*.
